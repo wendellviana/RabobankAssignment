@@ -20,7 +20,7 @@ public class AccountService {
     }
 
     public Account findByAccountNumber(String accountNumber){
-        return accountRepository.findByAccountNumber(accountNumber)
+        return accountRepository.findByAccountNumber(accountNumber);
     }
 
 }
