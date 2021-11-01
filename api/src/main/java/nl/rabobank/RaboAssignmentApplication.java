@@ -6,9 +6,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 
+import nl.rabobank.authorizations.Authorization;
 import nl.rabobank.mongo.MongoConfiguration;
+import nl.rabobank.mongo.entity.Access;
 import nl.rabobank.mongo.entity.Account;
+import nl.rabobank.mongo.repository.AccessRepository;
 import nl.rabobank.mongo.repository.AccountRepository;
+import nl.rabobank.service.NextSequenceService;
 
 @SpringBootApplication
 @Import(MongoConfiguration.class)
@@ -16,6 +20,12 @@ public class RaboAssignmentApplication implements CommandLineRunner {
 
     @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    private AccessRepository accessRepository;
+
+    @Autowired
+    private NextSequenceService nextSequenceService;
 
     public static void main(final String[] args)
     {
@@ -27,6 +37,7 @@ public class RaboAssignmentApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         
         accountRepository.deleteAll();
+        accessRepository.deleteAll();
         
         // save a couple of accounts
         accountRepository.save(new Account("123", "Test", 3000.00, "payments"));
@@ -43,27 +54,10 @@ public class RaboAssignmentApplication implements CommandLineRunner {
         accountRepository.save(new Account("55", "sav6", 8000.00, "savings"));
         accountRepository.save(new Account("61", "sav7", 9000.00, "savings"));
 
-        // fetch all customers
-        System.out.println("Customers found with findAll():");
-        System.out.println("-------------------------------");
-        for (Account account : accountRepository.findAll()) {
-            System.out.println(account);
-        }
-        System.out.println();
-
-        // fetch an individual customer
-        System.out.println("Account by account type payment");
-        System.out.println("--------------------------------");
-        for (Account account : accountRepository.findByAccountType("payments")) {
-            System.out.println(account);
-        }
-
-        System.out.println("Account by account type savings");
-        System.out.println("--------------------------------");
-        for (Account account : accountRepository.findByAccountType("savings")) {
-            System.out.println(account);
-        }
+        accessRepository.save(new Access(nextSequenceService.generateSequence(Access.ACCESS_SEQUENCE), "11", "Test1", "Test", Authorization.READ.toString()));
+        accessRepository.save(new Access(nextSequenceService.generateSequence(Access.ACCESS_SEQUENCE), "2", "Test3", "Asd", Authorization.WRITE.toString()));
+        accessRepository.save(new Access(nextSequenceService.generateSequence(Access.ACCESS_SEQUENCE), "55", "Test2", "Awss", Authorization.READ.toString()));
+        accessRepository.save(new Access(nextSequenceService.generateSequence(Access.ACCESS_SEQUENCE), "5", "Test1", "Alsj", Authorization.WRITE.toString()));
+        accessRepository.save(new Access(nextSequenceService.generateSequence(Access.ACCESS_SEQUENCE), "61", "Test1", "Awzzs", Authorization.READ.toString()));
     }
-
-
 }
