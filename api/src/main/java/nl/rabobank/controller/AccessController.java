@@ -63,7 +63,7 @@ public class AccessController {
     private PowerOfAttorney transformAccess (Access access){
         Account a = accountService.findByAccountNumber(access.getAccountNumber());
         PaymentAccount pa = transform(a);
-        Authorization auth = access.getAuthorization().equals("READ") ? Authorization.READ : Authorization.WRITE;
+        Authorization auth = access.getAuthorization().toUpperCase().equals("READ") ? Authorization.READ : Authorization.WRITE;
 
         PowerOfAttorney pw = new PowerOfAttorney(access.getGranteeName(), access.getGrantorName(), pa, auth);
 
