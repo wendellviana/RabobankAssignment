@@ -3,6 +3,7 @@ package nl.rabobank;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
+
 import nl.rabobank.mongo.MongoConfiguration;
 
 @SpringBootApplication
@@ -11,6 +12,7 @@ public class RaboAssignmentApplication
 {
     public static void main(final String[] args)
     {
+        System.setProperty("server.servlet.context-path", "/rabobank");
         SpringApplication.run(RaboAssignmentApplication.class, args);
     }
 }
