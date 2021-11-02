@@ -11,4 +11,5 @@ public interface AccessRepository extends MongoRepository<Access, Integer>{
 
     List<Access> findByGrantorName(String grantorName);
     List<Access> findByGranteeName(String granteeName);
+    
 }
