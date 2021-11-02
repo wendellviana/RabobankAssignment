@@ -4,6 +4,7 @@ package nl.rabobank.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import nl.rabobank.dto.AccessDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +38,6 @@ public class SavingsAccountController {
    
     @GetMapping
     public List<SavingsAccount> getSavingsAccount(){
-        
         List<Account> accounts = accountService.findByAccountType(SAVINGS);
         List<SavingsAccount> savings = new ArrayList<SavingsAccount>();
         for(Account a : accounts){
@@ -48,7 +48,7 @@ public class SavingsAccountController {
 
     @PostMapping("/access")
     @ResponseStatus(HttpStatus.CREATED)
-    public void giveAccess(@RequestBody Access access){
+    public void giveAccess(@RequestBody AccessDTO access){
         accessService.giveAccess(access, SAVINGS);
     }
 

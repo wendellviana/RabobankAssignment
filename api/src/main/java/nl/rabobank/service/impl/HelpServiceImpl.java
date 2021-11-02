@@ -31,7 +31,6 @@ public class HelpServiceImpl implements HelpService{
 
         CustomSequences customSequences = mongoOperations.findAndModify(query, update, new FindAndModifyOptions().upsert(true).returnNew(true), CustomSequences.class);
         return !Objects.isNull(customSequences) ? customSequences.getSeq(): 1;
-        
     }
 
     public Account getAccount(String accountNumber, String accountType){

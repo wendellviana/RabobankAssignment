@@ -8,7 +8,6 @@ import nl.rabobank.mongo.entity.Account;
 
 public interface AccountRepository extends MongoRepository<Account, String> {
 
-
     List<Account> findByAccountType(String accountType);
     Account findByAccountNumber(String accountNumber);
 }

@@ -2,6 +2,9 @@ package nl.rabobank.service.impl;
 
 import java.util.List;
 
+import nl.rabobank.dto.AccessDTO;
+import nl.rabobank.service.HelpService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,29 +13,32 @@ import nl.rabobank.mongo.entity.Access;
 import nl.rabobank.mongo.entity.Account;
 import nl.rabobank.mongo.repository.AccessRepository;
 import nl.rabobank.service.AccessService;
+import org.springframework.ui.ModelMap;
 
 @Service
 public class AccessServiceImpl implements AccessService {
 
     private AccessRepository accessRepository;
-    private HelpServiceImpl helpService;
+    private HelpService helpService;
 
     @Autowired
-    public AccessServiceImpl(AccessRepository accessRepository,HelpServiceImpl helpService){
+    public AccessServiceImpl(AccessRepository accessRepository, HelpService helpService){
         this.accessRepository = accessRepository;
         this.helpService = helpService;
     }
 
-    public void giveAccess(Access access, String accountType){
-
-        Account account = helpService.getAccount(access.getAccountNumber(), accountType);
+    public AccessDTO giveAccess(AccessDTO accessDTO, String accountType){
+        ModelMapper model = new ModelMapper();
+        Account account = helpService.getAccount(accessDTO.getAccountNumber(), accountType);
         if(account != null){
-            access.setId(helpService.generateSequence(Access.ACCESS_SEQUENCE));
+            accessDTO.setId(helpService.generateSequence(Access.ACCESS_SEQUENCE));
+            Access access = model.map(accessDTO, Access.class);
             accessRepository.save(access);
         }else{
-            throw new AccountNotFoundException(access.getAccountNumber());
+            throw new AccountNotFoundException(accessDTO.getAccountNumber());
         }
-        
+        return accessDTO;
+
     }
 
     public List<Access> findByGrantorName(String grantorName){

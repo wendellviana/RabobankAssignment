@@ -23,6 +23,6 @@ public class Access {
     private String accountNumber;
     private String granteeName;
     private String grantorName; 
-    private String authorization; 
+    private String authorization;
 
 }

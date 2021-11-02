@@ -1,12 +1,14 @@
 package nl.rabobank.controller;
 
+import java.beans.BeanProperty;
 import java.util.ArrayList;
 import java.util.List;
 
+import nl.rabobank.service.impl.AccessServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.*;
 
 import nl.rabobank.account.PaymentAccount;
 import nl.rabobank.authorizations.Authorization;
@@ -20,7 +22,7 @@ import nl.rabobank.service.AccountService;
 @RestController
 public class AccessController {
 
-    private AccessService accessService; 
+    private AccessService accessService;
     private AccountService accountService;
 
     @Autowired
@@ -42,7 +44,7 @@ public class AccessController {
 
     
     @GetMapping("/granteeName/{granteeName}")
-    public List<PowerOfAttorney> accessByGranteeName(String granteeName){
+    public List<PowerOfAttorney> accessByGranteeName(@PathVariable String granteeName){
         List<Access> accessList = accessService.findByGranteeName(granteeName);
         List<PowerOfAttorney> pwList = new ArrayList<PowerOfAttorney>();
         for(Access access : accessList){
@@ -53,7 +55,7 @@ public class AccessController {
     }
 
     @GetMapping("/grantorName/{grantorName}")
-    public List<PowerOfAttorney> accessByGrantorName(String grantorName){
+    public List<PowerOfAttorney> accessByGrantorName(@PathVariable String grantorName){
         List<Access> accessList = accessService.findByGrantorName(grantorName);
         List<PowerOfAttorney> pwList = new ArrayList<PowerOfAttorney>();
         for(Access access : accessList){
