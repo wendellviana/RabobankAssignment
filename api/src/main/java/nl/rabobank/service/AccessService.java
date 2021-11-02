@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import nl.rabobank.exception.AccountNotFoundException;
 import nl.rabobank.mongo.entity.Access;
 import nl.rabobank.mongo.entity.Account;
 import nl.rabobank.mongo.repository.AccessRepository;
@@ -30,6 +31,8 @@ public class AccessService {
         if(account != null){
             access.setId(nextSequenceService.generateSequence(Access.ACCESS_SEQUENCE));
             accessRepository.save(access);
+        }else{
+            throw new AccountNotFoundException(access.getAccountNumber());
         }
         
     }
