@@ -2,8 +2,6 @@ package nl.rabobank.mongo.repository;
 
 import java.util.List;
 
-import javax.management.Query;
-
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import nl.rabobank.mongo.entity.Account;
