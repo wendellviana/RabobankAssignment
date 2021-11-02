@@ -49,12 +49,7 @@ public class PaymentAccountController {
     @PostMapping("/access")
     @ResponseStatus(HttpStatus.CREATED)
     public void giveAccess(@RequestBody Access access) {
-        try{
-            accessService.giveAccess(access, PAYMENTS);  
-        }catch(AccountNotFoundException ex){
-            new AccountNotFoundException(access.getAccountNumber());
-        }
-          
+        accessService.giveAccess(access, PAYMENTS);       
     }
     private PaymentAccount transform(Account account){
         PaymentAccount sa = new PaymentAccount(account.getAccountNumber(), account.getAccountHolderName(), account.getBalance());

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import nl.rabobank.account.SavingsAccount;
-import nl.rabobank.exception.AccountNotFoundException;
 import nl.rabobank.mongo.entity.Access;
 import nl.rabobank.mongo.entity.Account;
 import nl.rabobank.service.AccessService;
@@ -50,11 +49,7 @@ public class SavingsAccountController {
     @PostMapping("/access")
     @ResponseStatus(HttpStatus.CREATED)
     public void giveAccess(@RequestBody Access access){
-        try{
-            accessService.giveAccess(access, SAVINGS);
-        }catch(AccountNotFoundException ex){
-            new AccountNotFoundException(access.getAccountNumber());
-        }
+        accessService.giveAccess(access, SAVINGS);
     }
 
     private SavingsAccount transformAccount(Account account){
