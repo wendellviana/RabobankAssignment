@@ -1,15 +1,5 @@
 package nl.rabobank.controller;
 
-import java.beans.BeanProperty;
-import java.util.ArrayList;
-import java.util.List;
-
-import nl.rabobank.service.impl.AccessServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.repository.query.Param;
-import org.springframework.web.bind.annotation.*;
-
 import nl.rabobank.account.PaymentAccount;
 import nl.rabobank.authorizations.Authorization;
 import nl.rabobank.authorizations.PowerOfAttorney;
@@ -17,6 +7,14 @@ import nl.rabobank.mongo.entity.Access;
 import nl.rabobank.mongo.entity.Account;
 import nl.rabobank.service.AccessService;
 import nl.rabobank.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RequestMapping("/access")
 @RestController

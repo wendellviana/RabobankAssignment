@@ -3,24 +3,12 @@ package nl.rabobank.service;
 import nl.rabobank.authorizations.Authorization;
 import nl.rabobank.dto.AccessDTO;
 import nl.rabobank.exception.AccountNotFoundException;
-import nl.rabobank.mongo.entity.Access;
-import nl.rabobank.mongo.entity.Account;
 import nl.rabobank.mongo.repository.AccessRepository;
-import nl.rabobank.service.impl.AccessServiceImpl;
 import org.bson.assertions.Assertions;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.internal.Classes;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @SpringBootTest
 
