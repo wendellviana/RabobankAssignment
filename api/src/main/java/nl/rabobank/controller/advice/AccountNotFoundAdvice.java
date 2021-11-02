@@ -1,4 +1,4 @@
-package nl.rabobank.controller;
+package nl.rabobank.controller.advice;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
