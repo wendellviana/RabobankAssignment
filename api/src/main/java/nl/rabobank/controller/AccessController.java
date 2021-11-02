@@ -41,7 +41,7 @@ public class AccessController {
     }
 
     
-    @GetMapping("/{granteeName}")
+    @GetMapping("/granteeName/{granteeName}")
     public List<PowerOfAttorney> accessByGranteeName(String granteeName){
         List<Access> accessList = accessService.findByGranteeName(granteeName);
         List<PowerOfAttorney> pwList = new ArrayList<PowerOfAttorney>();
@@ -52,7 +52,7 @@ public class AccessController {
         return pwList;
     }
 
-    @GetMapping("/{grantorName}")
+    @GetMapping("/grantorName/{grantorName}")
     public List<PowerOfAttorney> accessByGrantorName(String grantorName){
         List<Access> accessList = accessService.findByGrantorName(grantorName);
         List<PowerOfAttorney> pwList = new ArrayList<PowerOfAttorney>();
