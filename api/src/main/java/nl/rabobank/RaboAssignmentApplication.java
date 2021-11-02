@@ -54,7 +54,7 @@ public class RaboAssignmentApplication implements CommandLineRunner {
         accountRepository.save(new Account("55", "sav6", 8000.00, "savings"));
         accountRepository.save(new Account("61", "sav7", 9000.00, "savings"));
 
-        accessRepository.save(new Access(nextSequenceService.generateSequence(), "11", "Test1", "Test", Authorization.READ.toString()));
+        accessRepository.save(new Access(nextSequenceService.generateSequence(Access.ACCESS_SEQUENCE), "11", "Test1", "Test", Authorization.READ.toString()));
  
     }
 }
