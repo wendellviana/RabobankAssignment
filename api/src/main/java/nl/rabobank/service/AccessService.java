@@ -14,20 +14,22 @@ import nl.rabobank.mongo.repository.AccountRepository;
 @Service
 public class AccessService {
 
-    @Autowired
     private AccessRepository accessRepository;
-
-    @Autowired
     private NextSequenceService nextSequenceService;
+    private AccountRepository accountRepository;
 
     @Autowired
-    private AccountRepository accountRepository;
+    public AccessService(AccessRepository accessRepository,NextSequenceService nextSequenceService, AccountRepository accountRepository){
+        this.accessRepository = accessRepository;
+        this.accountRepository = accountRepository;
+        this.nextSequenceService = nextSequenceService;
+    }
 
     public void giveAccess (Access access){
 
         Optional<Account> optAccount = accountRepository.findById(access.getAccountNumber());
         if(optAccount.isPresent()){
-            access.setId(nextSequenceService.generateSequence());
+            access.setId(nextSequenceService.generateSequence(Access.ACCESS_SEQUENCE));
             accessRepository.save(access);
         }
     }

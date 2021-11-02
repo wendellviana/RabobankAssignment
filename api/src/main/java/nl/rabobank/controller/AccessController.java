@@ -19,13 +19,16 @@ import nl.rabobank.service.AccountService;
 @RequestMapping("/access")
 @RestController
 public class AccessController {
-    
-    @Autowired
-    private AccessService accessService;
 
-    @Autowired
+    private AccessService accessService; 
     private AccountService accountService;
 
+    @Autowired
+    public AccessController (AccessService accessService,AccountService accountService){
+        this.accessService = accessService;
+        this.accountService = accountService;
+    }
+   
     @GetMapping
     public List<PowerOfAttorney> getAll(){
         List<Access> accessList = accessService.findAll();

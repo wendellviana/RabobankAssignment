@@ -23,11 +23,14 @@ import nl.rabobank.service.AccountService;
 @RestController
 public class PaymentAccountController {
 
-    @Autowired
-    private AccessService accessService;
+    private AccessService accessService; 
+    private AccountService accountService;
 
     @Autowired
-    private AccountService accountService;
+    public PaymentAccountController(AccessService accessService,AccountService accountService){
+        this.accessService = accessService;
+        this.accountService = accountService;
+    }
 
     @GetMapping
     public List<PaymentAccount> getSavingsAccount(){
@@ -38,8 +41,6 @@ public class PaymentAccountController {
         }
         return payments;
     }
-
-
 
     @PostMapping("/access")
     @ResponseStatus(HttpStatus.CREATED)

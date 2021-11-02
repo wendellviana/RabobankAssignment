@@ -18,14 +18,19 @@ import nl.rabobank.service.NextSequenceService;
 @Import(MongoConfiguration.class)
 public class RaboAssignmentApplication implements CommandLineRunner {
 
-    @Autowired
     private AccountRepository accountRepository;
-
-    @Autowired
     private AccessRepository accessRepository;
+    private NextSequenceService nextSequenceService;
 
     @Autowired
-    private NextSequenceService nextSequenceService;
+    public RaboAssignmentApplication(AccountRepository accountRepository, AccessRepository accessRepository,NextSequenceService nextSequenceService){
+        this.accountRepository = accountRepository;
+        this.accessRepository = accessRepository;
+        this.nextSequenceService = nextSequenceService;
+    }
+   
+    @Autowired
+    
 
     public static void main(final String[] args)
     {
@@ -55,6 +60,7 @@ public class RaboAssignmentApplication implements CommandLineRunner {
         accountRepository.save(new Account("61", "sav7", 9000.00, "savings"));
 
         accessRepository.save(new Access(nextSequenceService.generateSequence(Access.ACCESS_SEQUENCE), "11", "Test1", "Test", Authorization.READ.toString()));
+        accessRepository.save(new Access(nextSequenceService.generateSequence(Access.ACCESS_SEQUENCE), "22", "Test1", "Test", Authorization.READ.toString()));
  
     }
 }

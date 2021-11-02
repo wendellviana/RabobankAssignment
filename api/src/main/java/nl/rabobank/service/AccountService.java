@@ -10,9 +10,14 @@ import nl.rabobank.mongo.repository.AccountRepository;
 
 @Service
 public class AccountService {
-    
-    @Autowired
+
     private AccountRepository accountRepository;
+
+    @Autowired
+    public AccountService (AccountRepository accountRepository){
+        this.accountRepository = accountRepository;
+
+    }
 
 
     public List<Account> findByAccountType(String accountType){

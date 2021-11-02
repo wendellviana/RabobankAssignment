@@ -24,12 +24,15 @@ import nl.rabobank.service.AccountService;
 @RestController
 public class SavingsAccountController {
 
-    @Autowired
-    private AccessService accessService;
-
-    @Autowired
+    private AccessService accessService; 
     private AccountService accountService;
 
+    @Autowired
+    public SavingsAccountController (AccessService accessService,AccountService accountService){
+        this.accessService = accessService;
+        this.accountService = accountService;
+    }
+   
     @GetMapping
     public List<SavingsAccount> getSavingsAccount(){
         List<Account> accounts = accountService.findByAccountType("savings");
@@ -50,7 +53,5 @@ public class SavingsAccountController {
         SavingsAccount sa = new SavingsAccount(account.getAccountNumber(), account.getAccountHolderName(), account.getBalance());
         return sa;
     }
-
-
     
 }
