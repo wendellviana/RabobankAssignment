@@ -28,8 +28,7 @@ public class RaboAssignmentApplication implements CommandLineRunner {
         this.accessRepository = accessRepository;
         this.helpService = helpService;
     }
-   
-    @Autowired
+
     
 
     public static void main(final String[] args)
