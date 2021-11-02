@@ -21,9 +21,8 @@ public class NextSequenceService  {
         Query query = new Query(Criteria.where("id").is(seqName));
         Update update = new Update().inc("seq", 1);
 
-        //CustomSequences customSequences = mongoOperations.findAndModify(query, update, options() .return new(true).upsert(true), CustomSequences.class);
         CustomSequences customSequences = mongoOperations.findAndModify(query, update, CustomSequences.class);
-
+        
         return !Objects.isNull(customSequences) ? customSequences.getSeq(): 1;
         
     }

@@ -10,15 +10,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import nl.rabobank.account.PaymentAccount;
-import nl.rabobank.authorizations.PowerOfAttorney;
 import nl.rabobank.mongo.entity.Access;
 import nl.rabobank.mongo.entity.Account;
 import nl.rabobank.service.AccessService;
 import nl.rabobank.service.AccountService;
-
-import org.springframework.web.bind.annotation.RestController;
 
 
 @RequestMapping("/payments")

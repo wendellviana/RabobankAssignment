@@ -27,7 +27,7 @@ public class AccessService {
 
         Optional<Account> optAccount = accountRepository.findById(access.getAccountNumber());
         if(optAccount.isPresent()){
-            access.setId(nextSequenceService.generateSequence(Access.ACCESS_SEQUENCE));
+            access.setId(nextSequenceService.generateSequence());
             accessRepository.save(access);
         }
     }
