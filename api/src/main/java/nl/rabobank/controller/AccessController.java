@@ -7,6 +7,7 @@ import nl.rabobank.mongo.entity.Access;
 import nl.rabobank.mongo.entity.Account;
 import nl.rabobank.service.AccessService;
 import nl.rabobank.service.AccountService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -65,16 +66,11 @@ public class AccessController {
 
     private PowerOfAttorney transformAccess (Access access){
         Account a = accountService.findByAccountNumber(access.getAccountNumber());
-        PaymentAccount pa = transform(a);
+        PaymentAccount pa = new ModelMapper().map(a, PaymentAccount.class);
         Authorization auth = access.getAuthorization().toUpperCase().equals("READ") ? Authorization.READ : Authorization.WRITE;
 
         PowerOfAttorney pw = new PowerOfAttorney(access.getGranteeName(), access.getGrantorName(), pa, auth);
 
         return pw;
-    }
-
-    private PaymentAccount transform(Account account){
-        PaymentAccount sa = new PaymentAccount(account.getAccountNumber(), account.getAccountHolderName(), account.getBalance());
-        return sa;
     }
 }
