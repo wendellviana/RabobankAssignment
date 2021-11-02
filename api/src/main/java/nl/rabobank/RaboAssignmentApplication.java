@@ -12,7 +12,7 @@ import nl.rabobank.mongo.entity.Access;
 import nl.rabobank.mongo.entity.Account;
 import nl.rabobank.mongo.repository.AccessRepository;
 import nl.rabobank.mongo.repository.AccountRepository;
-import nl.rabobank.service.NextSequenceService;
+import nl.rabobank.service.HelpService;
 
 @SpringBootApplication
 @Import(MongoConfiguration.class)
@@ -20,13 +20,13 @@ public class RaboAssignmentApplication implements CommandLineRunner {
 
     private AccountRepository accountRepository;
     private AccessRepository accessRepository;
-    private NextSequenceService nextSequenceService;
+    private HelpService helpService;
 
     @Autowired
-    public RaboAssignmentApplication(AccountRepository accountRepository, AccessRepository accessRepository,NextSequenceService nextSequenceService){
+    public RaboAssignmentApplication(AccountRepository accountRepository, AccessRepository accessRepository,HelpService helpService){
         this.accountRepository = accountRepository;
         this.accessRepository = accessRepository;
-        this.nextSequenceService = nextSequenceService;
+        this.helpService = helpService;
     }
    
     @Autowired
@@ -59,8 +59,8 @@ public class RaboAssignmentApplication implements CommandLineRunner {
         accountRepository.save(new Account("55", "sav6", 8000.00, "savings"));
         accountRepository.save(new Account("61", "sav7", 9000.00, "savings"));
 
-        accessRepository.save(new Access(nextSequenceService.generateSequence(Access.ACCESS_SEQUENCE), "11", "Test1", "Test", Authorization.READ.toString()));
-        accessRepository.save(new Access(nextSequenceService.generateSequence(Access.ACCESS_SEQUENCE), "22", "Test1", "Test", Authorization.READ.toString()));
+        accessRepository.save(new Access(helpService.generateSequence(Access.ACCESS_SEQUENCE), "11", "Test1", "Test", Authorization.READ.toString()));
+        accessRepository.save(new Access(helpService.generateSequence(Access.ACCESS_SEQUENCE), "22", "Test1", "Test", Authorization.READ.toString()));
  
     }
 }

@@ -9,27 +9,24 @@ import nl.rabobank.exception.AccountNotFoundException;
 import nl.rabobank.mongo.entity.Access;
 import nl.rabobank.mongo.entity.Account;
 import nl.rabobank.mongo.repository.AccessRepository;
-import nl.rabobank.mongo.repository.AccountRepository;
 
 @Service
 public class AccessService {
 
     private AccessRepository accessRepository;
-    private NextSequenceService nextSequenceService;
-    private AccountRepository accountRepository;
+    private HelpService helpService;
 
     @Autowired
-    public AccessService(AccessRepository accessRepository,NextSequenceService nextSequenceService, AccountRepository accountRepository){
+    public AccessService(AccessRepository accessRepository,HelpService helpService){
         this.accessRepository = accessRepository;
-        this.accountRepository = accountRepository;
-        this.nextSequenceService = nextSequenceService;
+        this.helpService = helpService;
     }
 
-    public void giveAccess (Access access){
+    public void giveAccess (Access access, String accountType){
 
-        Account account = accountRepository.findByAccountNumber(access.getAccountNumber());
+        Account account = helpService.getAccount(access.getAccountNumber(), accountType);
         if(account != null){
-            access.setId(nextSequenceService.generateSequence(Access.ACCESS_SEQUENCE));
+            access.setId(helpService.generateSequence(Access.ACCESS_SEQUENCE));
             accessRepository.save(access);
         }else{
             throw new AccountNotFoundException(access.getAccountNumber());
@@ -49,9 +46,4 @@ public class AccessService {
         return accessRepository.findAll();
     }
 
-
-
-
-
-    
 }

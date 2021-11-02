@@ -10,15 +10,16 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
+import nl.rabobank.mongo.entity.Account;
 import nl.rabobank.mongo.entity.CustomSequences;
 
 @Service
-public class NextSequenceService  {
+public class HelpService {
 
     private MongoOperations mongoOperations;
 
     @Autowired 
-    public NextSequenceService(MongoOperations mongoOperations){
+    public HelpService(MongoOperations mongoOperations){
         this.mongoOperations = mongoOperations;
     }
     
@@ -31,4 +32,13 @@ public class NextSequenceService  {
         return !Objects.isNull(customSequences) ? customSequences.getSeq(): 1;
         
     }
+
+    public Account getAccount(String accountNumber, String accountType){
+        Query query = new Query(Criteria.where("accountNumber").is(accountNumber).and("accountType").is(accountType));
+        return mongoOperations.findOne(query, Account.class);
+    
+    }
+
+
 }
+

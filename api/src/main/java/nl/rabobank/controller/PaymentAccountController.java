@@ -27,6 +27,8 @@ public class PaymentAccountController {
     private AccessService accessService; 
     private AccountService accountService;
 
+    final String PAYMENTS = "payments";
+
     @Autowired
     public PaymentAccountController(AccessService accessService,AccountService accountService){
         this.accessService = accessService;
@@ -35,7 +37,7 @@ public class PaymentAccountController {
 
     @GetMapping
     public List<PaymentAccount> getSavingsAccount(){
-        final String PAYMENTS = "payments";
+        
         List<Account> accounts = accountService.findByAccountType(PAYMENTS);
         List<PaymentAccount> payments = new ArrayList<PaymentAccount>();
         for(Account a : accounts){
@@ -48,7 +50,7 @@ public class PaymentAccountController {
     @ResponseStatus(HttpStatus.CREATED)
     public void giveAccess(@RequestBody Access access) {
         try{
-            accessService.giveAccess(access);  
+            accessService.giveAccess(access, PAYMENTS);  
         }catch(AccountNotFoundException ex){
             new AccountNotFoundException(access.getAccountNumber());
         }
