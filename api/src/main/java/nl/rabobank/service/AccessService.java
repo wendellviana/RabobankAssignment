@@ -1,12 +1,10 @@
 package nl.rabobank.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import nl.rabobank.exception.AccountNotFoundBusinessException;
 import nl.rabobank.mongo.entity.Access;
 import nl.rabobank.mongo.entity.Account;
 import nl.rabobank.mongo.repository.AccessRepository;
