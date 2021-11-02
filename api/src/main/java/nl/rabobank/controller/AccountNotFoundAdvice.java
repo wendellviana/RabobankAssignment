@@ -10,7 +10,6 @@ import nl.rabobank.exception.AccountNotFoundException;
 
 @ControllerAdvice
 public class AccountNotFoundAdvice {
-  
   @ResponseBody
   @ExceptionHandler(AccountNotFoundException.class)
   @ResponseStatus(HttpStatus.NOT_FOUND)
