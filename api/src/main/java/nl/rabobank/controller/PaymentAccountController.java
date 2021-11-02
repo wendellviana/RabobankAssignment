@@ -34,7 +34,8 @@ public class PaymentAccountController {
 
     @GetMapping
     public List<PaymentAccount> getSavingsAccount(){
-        List<Account> accounts = accountService.findByAccountType("payments");
+        final String PAYMENTS = "payments";
+        List<Account> accounts = accountService.findByAccountType(PAYMENTS);
         List<PaymentAccount> payments = new ArrayList<PaymentAccount>();
         for(Account a : accounts){
             payments.add(transform(a));
