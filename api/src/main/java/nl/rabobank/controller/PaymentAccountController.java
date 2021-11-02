@@ -3,6 +3,8 @@ package nl.rabobank.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.security.auth.login.AccountNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,9 +48,8 @@ public class PaymentAccountController {
     @PostMapping("/access")
     @ResponseStatus(HttpStatus.CREATED)
     public void giveAccess(@RequestBody Access access) {
-        accessService.giveAccess(access);
+       accessService.giveAccess(access);     
     }
-
     private PaymentAccount transform(Account account){
         PaymentAccount sa = new PaymentAccount(account.getAccountNumber(), account.getAccountHolderName(), account.getBalance());
         return sa;
