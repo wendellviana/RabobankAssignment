@@ -5,17 +5,14 @@ import nl.rabobank.dto.AccessDTO;
 import nl.rabobank.exception.AccountNotFoundException;
 import nl.rabobank.mongo.entity.Access;
 import nl.rabobank.mongo.repository.AccessRepository;
-import org.bson.assertions.Assertions;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.junit.jupiter.MockitoSettings;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 @ExtendWith(MockitoExtension.class)
 public class AccessServiceTest {
@@ -39,12 +36,12 @@ public class AccessServiceTest {
     void giveAccessValidAccount() {
         AccessDTO accessDTO = new AccessDTO("6", "Wendell", "Test", Authorization.READ.toString());
         AccessDTO returnDTO = accessService.giveAccess(accessDTO, "payments");
-        Assertions.notNull("Acces id", returnDTO.getId());
+        Assertions.assertNotNull(returnDTO.getId());
     }
     @Test
     void giveAccessInvalidAccount(){
         AccessDTO accessDTO = new AccessDTO("0", "Wendell", "Test", Authorization.READ.toString());
-        Assert.assertThrows(AccountNotFoundException.class, () -> {
+        Assertions.assertThrows(AccountNotFoundException.class, () -> {
             accessService.giveAccess(accessDTO, "payments");
         });
     }
