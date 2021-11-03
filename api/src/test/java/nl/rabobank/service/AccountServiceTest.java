@@ -1,9 +1,7 @@
 package nl.rabobank.service;
 
-import nl.rabobank.mongo.entity.Access;
 import nl.rabobank.mongo.entity.Account;
 import nl.rabobank.mongo.repository.AccountRepository;
-import nl.rabobank.service.impl.AccessServiceImpl;
 import nl.rabobank.service.impl.AccountServiceImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -15,8 +13,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class AccountServiceTest {
